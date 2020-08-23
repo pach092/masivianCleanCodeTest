@@ -14,10 +14,11 @@ export default class Roulette{
     this.initializeRoutes();
   }
   public initializeRoutes() {
-    this.router.post(`${this.path}/newroulette`, this.newRoulette);
+    this.router.post(`${this.path}/new`, this.newRoulette);
     this.router.get(`${this.path}/opening`, auth({ secret: config.token.seed, algorithms: ['HS256'] }), this.rouletteOpening);
     this.router.post(`${this.path}/bet`, auth({ secret: config.token.seed, algorithms: ['HS256'] }), this.bet);
-    this.router.get(`${this.path}/close`, auth({ secret: config.token.seed, algorithms: ['HS256'] }), this.rouletteClose);
+    this.router.get(`${this.path}/close`, this.rouletteClose);
+    this.router.get(`${this.path}`, this.getAllRoulettes);
   }
   newRoulette = async (req: Request, res: Response) => {
     try {
@@ -136,7 +137,21 @@ export default class Roulette{
       for (const aB of allBets) {
         totalBets += parseFloat(aB.bet);
       }
+      await ConnectionMysql.queryWithParameters('CALL close_roulette (?)', [rouletteId]);
       return ServerResponse.message(res, 200, 1, { message: `La mesa ${validateRoulette[0].name} se cerró y ya no permite más apuestas`, allBets, totalBets });
+    } catch (error) {
+      return ServerResponse.error(res, error.toString());
+    }
+  }
+  getAllRoulettes = async (req: Request, res: Response) => {
+    try {
+      const start = req.query.start || 0;
+      const limit = req.query.limit || 5;
+      if (typeof(start) !== 'number' || typeof(limit) !== 'number') {
+        return ServerResponse.message(res, 200, 0, 'El campo start y limit deben ser númericos');
+      }
+      const roulettes = await ConnectionMysql.queryWithParameters('CALL get_all_roulettes (?, ?)', [start, limit]);
+      return ServerResponse.message(res, 200, 1, roulettes);
     } catch (error) {
       return ServerResponse.error(res, error.toString());
     }
