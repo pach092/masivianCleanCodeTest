@@ -1,0 +1,363 @@
+{
+	"info": {
+		"_postman_id": "ad8555f1-55b1-4999-86a9-88005c273689",
+		"name": "Masivian",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Roulette",
+			"item": [
+				{
+					"name": "newRoulette",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Nueva Ruleta 6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/roulette/newroulette",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"roulette",
+								"newroulette"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rouletteOpening",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d1daa58f-208e-4ca3-bf31-c4cb378b25d1",
+								"exec": [
+									"let resp  = pm.response.json()\r",
+									"if (resp.success === 1) {\r",
+									"    let token = resp.message.token   \r",
+									"    pm.environment.set(\"token\", token);    \r",
+									"} else {\r",
+									"    console.log(\"No se actualizo el token\")   \r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/roulette/opening?id=2LMQa5Ts3r4e3rgFXohsm7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"roulette",
+								"opening"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2LMQa5Ts3r4e3rgFXohsm7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllRoulettes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cf6b394d-d123-479c-9cf2-3db5aa3d1de7",
+								"exec": [
+									"let resp  = pm.response.json()\r",
+									"if (resp.success === 1) {\r",
+									"    let token = resp.message.token   \r",
+									"    pm.environment.set(\"token\", token);    \r",
+									"} else {\r",
+									"    console.log(\"No se actualizo el token\")   \r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/roulette",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"roulette"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rouletteClose",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Nueva Ruleta 6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/roulette/close?id=2LMQa5Ts3r4e3rgFXohsm7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"roulette",
+								"close"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2LMQa5Ts3r4e3rgFXohsm7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bet\": \"5\",\r\n    \"money\": 12\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/roulette/bet",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"roulette",
+								"bet"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "newUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": \"casti@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/new",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userAuth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e19ed415-8767-441a-a98c-0784de6c4683",
+								"exec": [
+									"let resp  = pm.response.json()\r",
+									"if (resp.success === 1) {\r",
+									"    console.log()\r",
+									"    let token = resp.message   \r",
+									"    pm.environment.set(\"token\", token);    \r",
+									"} else {\r",
+									"    console.log(\"No se actualizo el token\")   \r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": \"pachobernal5@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/auth",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addFunds",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"funds\": 10000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/addfunds",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"addfunds"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
