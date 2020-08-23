@@ -1,4 +1,7 @@
 import _ from 'lodash';
+import ConnectionMysql from '../database/mysql';
+import jwt from 'jsonwebtoken';
+import { config } from '.';
 export default class Functions {
   public static formValidate(fields: string[], body: object): Promise<any> {
     return new Promise(resolve => {
@@ -24,6 +27,20 @@ export default class Functions {
         }
       }
       resolve(error);
+    });
+  }
+  public static generateToken(id: string): Promise<any> {
+    return new Promise(async (resolve) => {
+      const token = jwt.sign(
+        {
+          id
+        },
+        config.token.seed,
+        {
+          expiresIn: config.token.expire
+        }
+      );
+      resolve(token);
     });
   }
 }
