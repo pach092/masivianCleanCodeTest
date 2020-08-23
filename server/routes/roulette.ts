@@ -15,8 +15,9 @@ export default class Roulette{
   }
   public initializeRoutes() {
     this.router.post(`${this.path}/newroulette`, this.newRoulette);
-    this.router.get(`${this.path}/rouletteopening`, auth({ secret: config.token.seed, algorithms: ['HS256'] }), this.rouletteOpening);
+    this.router.get(`${this.path}/opening`, auth({ secret: config.token.seed, algorithms: ['HS256'] }), this.rouletteOpening);
     this.router.post(`${this.path}/bet`, auth({ secret: config.token.seed, algorithms: ['HS256'] }), this.bet);
+    this.router.get(`${this.path}/close`, auth({ secret: config.token.seed, algorithms: ['HS256'] }), this.rouletteClose);
   }
   newRoulette = async (req: Request, res: Response) => {
     try {
@@ -108,13 +109,34 @@ export default class Roulette{
           await ConnectionMysql.queryWithParameters('CALL update_roulette_bet (?, ?, ?)', [JSON.stringify(bets), getBets[0].id, rouletteId]);
           await ConnectionMysql.queryWithParameters('CALL substract_funds (?, ?)', [userId, money]);
         } else {
-          const date = moment().utc(false).format('YYYY-MM-DDTHH:mm:SSZ');
+          const date = moment().utc(false).format('YYYY-MM-DDTHH:mm:ssZ');
           bets.push({ userId, money, bet, date });
           await ConnectionMysql.queryWithParameters('CALL update_roulette_bet (?, ?, ?)', [JSON.stringify(bets), getBets[0].id, rouletteId]);
           await ConnectionMysql.queryWithParameters('CALL substract_funds (?, ?)', [userId, money]);
         }
       }
       return ServerResponse.message(res, 200, 1, 'Apuesta realizada correctamente');
+    } catch (error) {
+      return ServerResponse.error(res, error.toString());
+    }
+  }
+  rouletteClose = async (req: Request, res: Response) => {
+    try {
+      const rouletteId = req.query.id;
+      if (!rouletteId) {
+        return ServerResponse.message(res, 200, 0, 'No detectamos un id de ruleta');
+      }
+      const validateRoulette = await ConnectionMysql.queryWithParameters('CALL get_roulette_by_id (?)', [rouletteId]);
+      if (validateRoulette.length === 0) {
+        return ServerResponse.message(res, 200, 0, 'ID de ruleta no válido');
+      }
+      const bets = await ConnectionMysql.queryWithParameters('CALL get_bets (?)', [rouletteId]);
+      const allBets = JSON.parse(bets[0].bets);
+      let totalBets = 0;
+      for (const aB of allBets) {
+        totalBets += parseFloat(aB.bet);
+      }
+      return ServerResponse.message(res, 200, 1, { message: `La mesa ${validateRoulette[0].name} se cerró y ya no permite más apuestas`, allBets, totalBets });
     } catch (error) {
       return ServerResponse.error(res, error.toString());
     }
