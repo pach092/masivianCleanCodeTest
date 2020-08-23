@@ -1,5 +1,6 @@
 import { Server } from './server';
-
-const server = new Server([]);
-
+import Roulette from './routes/roulette';
+const server = new Server([
+  new Roulette()
+]);
 server.start(() => { });
