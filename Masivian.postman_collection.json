@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ad8555f1-55b1-4999-86a9-88005c273689",
+		"_postman_id": "54f21d2a-c240-4d05-bec5-5faa1a986bbc",
 		"name": "Masivian",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -23,9 +23,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/roulette/newroulette",
+							"raw": "https://masivian.franciscobernal.info/api/roulette/newroulette",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"masivian",
+								"franciscobernal",
+								"info"
 							],
 							"path": [
 								"api",
@@ -42,7 +45,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "d1daa58f-208e-4ca3-bf31-c4cb378b25d1",
+								"id": "d4eceb35-77d7-42ed-8aae-b1585c51ec2a",
 								"exec": [
 									"let resp  = pm.response.json()\r",
 									"if (resp.success === 1) {\r",
@@ -82,9 +85,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/roulette/opening?id=2LMQa5Ts3r4e3rgFXohsm7",
+							"raw": "https://masivian.franciscobernal.info/api/roulette/opening?id=2LMQa5Ts3r4e3rgFXohsm7",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"masivian",
+								"franciscobernal",
+								"info"
 							],
 							"path": [
 								"api",
@@ -107,7 +113,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "cf6b394d-d123-479c-9cf2-3db5aa3d1de7",
+								"id": "315c6a2a-6ec7-47c5-950d-34406b0ddda2",
 								"exec": [
 									"let resp  = pm.response.json()\r",
 									"if (resp.success === 1) {\r",
@@ -140,9 +146,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/roulette",
+							"raw": "https://masivian.franciscobernal.info/api/roulette",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"masivian",
+								"franciscobernal",
+								"info"
 							],
 							"path": [
 								"api",
@@ -180,9 +189,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/roulette/close?id=2LMQa5Ts3r4e3rgFXohsm7",
+							"raw": "https://masivian.franciscobernal.info/api/roulette/close?id=2LMQa5Ts3r4e3rgFXohsm7",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"masivian",
+								"franciscobernal",
+								"info"
 							],
 							"path": [
 								"api",
@@ -224,9 +236,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/roulette/bet",
+							"raw": "https://masivian.franciscobernal.info/api/roulette/bet",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"masivian",
+								"franciscobernal",
+								"info"
 							],
 							"path": [
 								"api",
@@ -258,9 +273,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/user/new",
+							"raw": "https://masivian.franciscobernal.info/api/user/new",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"masivian",
+								"franciscobernal",
+								"info"
 							],
 							"path": [
 								"api",
@@ -277,7 +295,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "e19ed415-8767-441a-a98c-0784de6c4683",
+								"id": "b2401d82-83ed-46a1-a71d-b73b2c4448bc",
 								"exec": [
 									"let resp  = pm.response.json()\r",
 									"if (resp.success === 1) {\r",
@@ -305,9 +323,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/auth",
+							"raw": "https://masivian.franciscobernal.info/api/auth",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"masivian",
+								"franciscobernal",
+								"info"
 							],
 							"path": [
 								"api",
@@ -342,9 +363,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/user/addfunds",
+							"raw": "https://masivian.franciscobernal.info/api/user/addfunds",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"masivian",
+								"franciscobernal",
+								"info"
 							],
 							"path": [
 								"api",
