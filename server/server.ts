@@ -13,7 +13,7 @@ export class Server {
     this.initializeControllers(controllers);
     this.app.use((err: any, _req: any, res: express.Response, next: any) => {
       if (err.name === 'UnauthorizedError') {
-        ServerResponse.message(res, 401, 0, 'You can access to this endpoint');
+        ServerResponse.message(res, 401, 0, 'Para acceder a este endpoint debes de estar logueado');
         return;
       }
       next();

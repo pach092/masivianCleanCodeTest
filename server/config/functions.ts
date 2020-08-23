@@ -29,11 +29,12 @@ export default class Functions {
       resolve(error);
     });
   }
-  public static generateToken(id: string): Promise<any> {
+  public static generateToken(id: string, roulette: any): Promise<any> {
     return new Promise(async (resolve) => {
       const token = jwt.sign(
         {
-          id
+          id,
+          roulette
         },
         config.token.seed,
         {

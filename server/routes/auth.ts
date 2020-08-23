@@ -28,7 +28,7 @@ export default class Auth{
       if (!bcrypt.compareSync(password, userInfo[0].password)) {
         return ServerResponse.message(res, 200, 0, 'Combinación usuario/contraseña erronea');
       }
-      const token = await Functions.generateToken(userInfo[0].id);
+      const token = await Functions.generateToken(userInfo[0].id, null);
       return ServerResponse.message(res, 200, 1, token);
     } catch (error) {
       return ServerResponse.error(res, error.toString());
