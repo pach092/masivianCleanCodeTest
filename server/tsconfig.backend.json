@@ -1,0 +1,17 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../dist",
+        "types": [],
+        "emitDecoratorMetadata": true,
+    	"experimentalDecorators": true,
+    	"allowJs": true
+    },
+    "exclude": [
+        "test.ts",
+        "**/*.spec.ts"
+    ],
+    "include": [
+		"**/*"
+    ]
+}
