@@ -15,8 +15,8 @@ export default class Roulette{
   }
   newRoulette = async (req: Request, res: Response) => {
     try {
-      const Validatefields = ['name'];
-      const validate = await Functions.formValidate(Validatefields, req.body);
+      const validateFields = ['name'];
+      const validate = await Functions.formValidate(validateFields, req.body);
       if (validate.error === 1) {
         return ServerResponse.message(res, 200, 0, validate.message);
       }
